@@ -1939,75 +1939,89 @@ body.hushstyle #chat {
     }
 }
 
-/* --- Chat Style: Ripple (Big Portrait Version) --- */
+/* --- Chat Style: Ripple (Nuclear Override) --- */
 
-/* 1. MAIN GRID SETUP */
+/* 1. FORCE THE GRID LAYOUT (Targeting every possible combination to win priority) */
 body.ripplestyle #chat .mes,
-body.ripplestyle #chat .mes[is_user="true"] {
+body.ripplestyle.big-avatars #chat .mes,
+body.ripplestyle #chat .mes[is_user="true"],
+body.ripplestyle.big-avatars #chat .mes[is_user="true"] {
     display: grid !important;
-    /* COLUMN 1 IS NOW 280px WIDE - Change this number to make images wider/thinner */
-    grid-template-columns: 280px 1fr !important; 
-    gap: 20px; /* Increased gap for better spacing */
-    align-items: start;
+    /* FORCE THE IMAGE COLUMN WIDTH HERE: 280px */
+    grid-template-columns: 280px 1fr !important;
+    gap: 20px !important;
+    align-items: start !important;
     
+    /* Reset container */
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
-    margin: 30px 0 !important; /* More vertical breathing room */
+    margin: 30px 0 !important;
     overflow: visible !important;
 }
 
-/* 2. AVATAR WRAPPER (Always on the Left) */
+/* 2. FORCE AVATAR TO LEFT COLUMN */
 body.ripplestyle #chat .mes .mesAvatarWrapper,
-body.ripplestyle #chat .mes[is_user="true"] .mesAvatarWrapper {
+body.ripplestyle.big-avatars #chat .mes .mesAvatarWrapper {
     grid-column: 1 !important;
-    order: 1 !important; 
+    order: 1 !important;
     
-    position: sticky;
-    top: 20px;
-    z-index: 10;
+    width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
+    position: sticky !important;
+    top: 20px !important;
     display: block !important;
-    width: 100% !important;
+    z-index: 10;
 }
 
-/* 3. AVATAR IMAGE STYLING (The Big Portrait) */
+/* 3. FORCE IMAGE SIZE (Override any 'calc' or variables) */
+body.ripplestyle #chat .mes .avatar,
+body.ripplestyle.big-avatars #chat .mes .avatar,
 body.ripplestyle #chat .mes .mesAvatarWrapper .avatar {
+    /* FORCE WIDTH AND HEIGHT HERE */
     width: 100% !important;
-    /* HEIGHT IS NOW 420px - Change this number to make images taller/shorter */
     height: 420px !important; 
+    
     min-width: 100% !important;
-    border-radius: 15px !important; /* Slightly more rounded */
-    box-shadow: 4px 4px 15px rgba(0,0,0,0.5); /* Deeper shadow */
+    min-height: 420px !important;
+    max-width: 100% !important;
+    max-height: 420px !important;
+    
+    border-radius: 15px !important;
+    box-shadow: 4px 4px 15px rgba(0,0,0,0.5) !important;
     margin: 0 !important;
     border: none !important;
-    overflow: hidden;
 }
 
-body.ripplestyle #chat .mes .mesAvatarWrapper .avatar img {
+/* 4. FORCE IMG TAG TO FILL CONTAINER */
+body.ripplestyle #chat .mes .avatar img,
+body.ripplestyle.big-avatars #chat .mes .avatar img {
     width: 100% !important;
     height: 100% !important;
-    object-fit: cover;
-    object-position: top center; /* Keeps the face in frame */
+    object-fit: cover !important;
+    object-position: top center !important;
+    display: block !important;
+    border: none !important;
 }
 
-/* 4. TEXT BUBBLE (Always on the Right) */
+/* 5. FORCE TEXT BUBBLE TO RIGHT COLUMN */
 body.ripplestyle #chat .mes .mes_block,
 body.ripplestyle #chat .mes[is_user="true"] .mes_block {
     grid-column: 2 !important;
-    order: 2 !important; 
+    order: 2 !important;
+    
+    width: fit-content !important;
+    max-width: 100% !important;
+    min-height: 150px !important;
     
     position: relative;
     background-color: var(--SmartThemeBotMesBlurTintColor) !important;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
-    padding: 20px 25px; /* More padding inside text bubble */
+    padding: 20px 25px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3) !important;
-    width: fit-content !important;
-    max-width: 100%;
-    min-height: 150px; /* Ensures bubble isn't tiny next to big image */
 }
 
 /* User Bubble Color */
@@ -2015,44 +2029,38 @@ body.ripplestyle #chat .mes[is_user="true"] .mes_block {
     background-color: var(--SmartThemeUserMesBlurTintColor) !important;
 }
 
-/* 5. CLEANUP: Hide tiny avatars */
+/* 6. CLEANUP (Hide extra elements) */
 body.ripplestyle #chat .mes .mes_block .avatar,
 body.ripplestyle #chat .mes .ch_name .avatar,
 body.ripplestyle #chat .chat_msg_avatar {
     display: none !important;
 }
 
-/* 6. NAME HEADER */
 body.ripplestyle #chat .mes .ch_name {
-    margin-bottom: 15px;
-    border-bottom: 1px solid rgba(255,255,255,0.15);
-    padding-bottom: 8px;
     display: block !important;
     text-align: left !important;
-    font-size: 1.2em; /* Larger name */
-    font-weight: bold;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    margin-bottom: 15px !important;
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    padding-bottom: 8px;
 }
 body.ripplestyle #chat .mes[is_user="true"] .ch_name {
-    text-align: left !important;
     margin-right: 0 !important;
+    text-align: left !important;
 }
 
-/* 7. MOBILE RESPONSIVENESS */
+/* 7. MOBILE FIXES */
 @media screen and (max-width: 1000px) {
-    /* On mobile, we shrink it back down so it fits on screen */
     body.ripplestyle #chat .mes,
+    body.ripplestyle.big-avatars #chat .mes,
     body.ripplestyle #chat .mes[is_user="true"] {
         grid-template-columns: 110px 1fr !important;
-        gap: 10px;
     }
-    body.ripplestyle #chat .mes .mesAvatarWrapper .avatar {
+    body.ripplestyle #chat .mes .avatar,
+    body.ripplestyle.big-avatars #chat .mes .avatar {
         height: 165px !important;
-    }
-    body.ripplestyle #chat .mes .mes_block {
-        padding: 10px 15px;
-        min-height: unset;
+        min-height: 165px !important;
     }
 }
 
