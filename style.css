@@ -1939,7 +1939,7 @@ body.hushstyle #chat {
     }
 }
 
-/* --- Chat Style: Ripple (Aligned Fix +30px Down Total, +3px Right) --- */
+/* --- Chat Style: Ripple (Final Alignment: +33px Down Total) --- */
 
 /* 1. MAIN GRID SETUP */
 body.ripplestyle #chat .mes,
@@ -1975,8 +1975,8 @@ body.ripplestyle.big-avatars #chat .mes .mesAvatarWrapper {
     z-index: 10;
     padding: 0 !important;
     
-    /* MOVED DOWN: Changed 55px to 65px */
-    margin: 65px 0 0 0 !important; 
+    /* MOVED DOWN: Changed 65px to 68px */
+    margin: 68px 0 0 0 !important; 
 }
 
 /* 3. AVATAR BOX (The Frame) */
@@ -2070,7 +2070,6 @@ body.ripplestyle #chat .mes[is_user="true"] .ch_name {
         height: 165px !important;
     }
 }
-
 /* --- Chat Style: Tide 聊天風格：「潮汐」 --- */
 
 body.tidestyle #chat {
