@@ -1939,20 +1939,18 @@ body.hushstyle #chat {
     }
 }
 
-/* --- Chat Style: Ripple (Nuclear Override) --- */
+/* --- Chat Style: Ripple (Supernova Fix) --- */
 
-/* 1. FORCE THE GRID LAYOUT (Targeting every possible combination to win priority) */
+/* 1. MAIN GRID SETUP */
 body.ripplestyle #chat .mes,
 body.ripplestyle.big-avatars #chat .mes,
 body.ripplestyle #chat .mes[is_user="true"],
 body.ripplestyle.big-avatars #chat .mes[is_user="true"] {
     display: grid !important;
-    /* FORCE THE IMAGE COLUMN WIDTH HERE: 280px */
-    grid-template-columns: 280px 1fr !important;
+    grid-template-columns: 280px 1fr !important; /* Force the column width */
     gap: 20px !important;
     align-items: start !important;
     
-    /* Reset container */
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
@@ -1961,52 +1959,63 @@ body.ripplestyle.big-avatars #chat .mes[is_user="true"] {
     overflow: visible !important;
 }
 
-/* 2. FORCE AVATAR TO LEFT COLUMN */
+/* 2. WRAPPER (The Container) */
 body.ripplestyle #chat .mes .mesAvatarWrapper,
 body.ripplestyle.big-avatars #chat .mes .mesAvatarWrapper {
     grid-column: 1 !important;
     order: 1 !important;
     
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    /* Force wrapper to fill the 280px column */
+    width: 100% !important; 
+    display: block !important; /* Stop it from flexing/centering */
     position: sticky !important;
     top: 20px !important;
-    display: block !important;
     z-index: 10;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-/* 3. FORCE IMAGE SIZE (Override any 'calc' or variables) */
+/* 3. AVATAR BOX (The Frame) */
 body.ripplestyle #chat .mes .avatar,
 body.ripplestyle.big-avatars #chat .mes .avatar,
 body.ripplestyle #chat .mes .mesAvatarWrapper .avatar {
-    /* FORCE WIDTH AND HEIGHT HERE */
+    /* FORCE DIMENSIONS */
     width: 100% !important;
-    height: 420px !important; 
+    height: 420px !important;
     
+    /* Remove default ST limits */
     min-width: 100% !important;
-    min-height: 420px !important;
-    max-width: 100% !important;
-    max-height: 420px !important;
+    max-width: none !important;
+    max-height: none !important;
     
+    display: block !important; /* Ensure it's not a flexbox centering the img */
     border-radius: 15px !important;
     box-shadow: 4px 4px 15px rgba(0,0,0,0.5) !important;
     margin: 0 !important;
     border: none !important;
+    padding: 0 !important;
 }
 
-/* 4. FORCE IMG TAG TO FILL CONTAINER */
+/* 4. THE IMAGE (The actual picture) */
 body.ripplestyle #chat .mes .avatar img,
-body.ripplestyle.big-avatars #chat .mes .avatar img {
+body.ripplestyle.big-avatars #chat .mes .avatar img,
+body.ripplestyle #chat .mes .mesAvatarWrapper .avatar img {
+    /* CRITICAL FIXES */
     width: 100% !important;
     height: 100% !important;
+    
+    /* This overrides the small size limit causing the issue */
+    max-width: none !important; 
+    max-height: none !important;
+    min-width: 100% !important;
+    
     object-fit: cover !important;
     object-position: top center !important;
     display: block !important;
     border: none !important;
 }
 
-/* 5. FORCE TEXT BUBBLE TO RIGHT COLUMN */
+/* 5. TEXT BUBBLE (Right Side) */
 body.ripplestyle #chat .mes .mes_block,
 body.ripplestyle #chat .mes[is_user="true"] .mes_block {
     grid-column: 2 !important;
@@ -2029,13 +2038,14 @@ body.ripplestyle #chat .mes[is_user="true"] .mes_block {
     background-color: var(--SmartThemeUserMesBlurTintColor) !important;
 }
 
-/* 6. CLEANUP (Hide extra elements) */
+/* 6. CLEANUP (Hide duplicates) */
 body.ripplestyle #chat .mes .mes_block .avatar,
 body.ripplestyle #chat .mes .ch_name .avatar,
 body.ripplestyle #chat .chat_msg_avatar {
     display: none !important;
 }
 
+/* Name Header */
 body.ripplestyle #chat .mes .ch_name {
     display: block !important;
     text-align: left !important;
@@ -2060,7 +2070,6 @@ body.ripplestyle #chat .mes[is_user="true"] .ch_name {
     body.ripplestyle #chat .mes .avatar,
     body.ripplestyle.big-avatars #chat .mes .avatar {
         height: 165px !important;
-        min-height: 165px !important;
     }
 }
 
