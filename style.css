@@ -1939,7 +1939,7 @@ body.hushstyle #chat {
     }
 }
 
-/* --- Chat Style: Ripple (Aligned & Big) --- */
+/* --- Chat Style: Ripple (Aligned Fix +20px Down, +3px Right) --- */
 
 /* 1. MAIN GRID SETUP */
 body.ripplestyle #chat .mes,
@@ -1956,8 +1956,8 @@ body.ripplestyle.big-avatars #chat .mes[is_user="true"] {
     box-shadow: none !important;
     padding: 0 !important;
     
-    /* MARGIN UPDATE: 10px on the Left to align with input box */
-    margin: 30px 0 30px 10px !important; 
+    /* MOVED RIGHT: Changed 10px to 13px */
+    margin: 30px 0 30px 13px !important; 
     
     overflow: visible !important;
 }
@@ -1975,8 +1975,8 @@ body.ripplestyle.big-avatars #chat .mes .mesAvatarWrapper {
     z-index: 10;
     padding: 0 !important;
     
-    /* MARGIN TOP UPDATE: Pushes image down to align with text bubble, not name */
-    margin: 35px 0 0 0 !important; 
+    /* MOVED DOWN: Changed 35px to 55px */
+    margin: 55px 0 0 0 !important; 
 }
 
 /* 3. AVATAR BOX (The Frame) */
