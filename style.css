@@ -1939,7 +1939,7 @@ body.hushstyle #chat {
     }
 }
 
-/* --- Chat Style: Ripple (Final Alignment: +33px Down Total) --- */
+/* --- Chat Style: Ripple (Structure Only - Allows External Glows) --- */
 
 /* 1. MAIN GRID SETUP */
 body.ripplestyle #chat .mes,
@@ -1953,13 +1953,13 @@ body.ripplestyle.big-avatars #chat .mes[is_user="true"] {
     
     background: transparent !important;
     border: none !important;
-    box-shadow: none !important;
     padding: 0 !important;
     
-    /* MARGIN: Kept the 13px right-shift from before */
+    /* Alignment: 30px down, 13px right */
     margin: 30px 0 30px 13px !important; 
     
     overflow: visible !important;
+    box-shadow: none !important; /* Remove container shadow */
 }
 
 /* 2. WRAPPER (The Container) */
@@ -1975,11 +1975,11 @@ body.ripplestyle.big-avatars #chat .mes .mesAvatarWrapper {
     z-index: 10;
     padding: 0 !important;
     
-    /* MOVED DOWN: Changed 65px to 68px */
+    /* Wrapper Margin: 68px down */
     margin: 68px 0 0 0 !important; 
 }
 
-/* 3. AVATAR BOX (The Frame) */
+/* 3. AVATAR BOX (The Frame - SIZE ONLY) */
 body.ripplestyle #chat .mes .avatar,
 body.ripplestyle.big-avatars #chat .mes .avatar,
 body.ripplestyle #chat .mes .mesAvatarWrapper .avatar {
@@ -1992,10 +1992,11 @@ body.ripplestyle #chat .mes .mesAvatarWrapper .avatar {
     
     display: block !important;
     border-radius: 15px !important;
-    box-shadow: 4px 4px 15px rgba(0,0,0,0.5) !important;
     margin: 0 !important;
-    border: none !important;
     padding: 0 !important;
+    
+    /* WE DO NOT SET BORDER OR SHADOW HERE 
+       This allows your external CSS to apply the gold glow. */
 }
 
 /* 4. THE IMAGE (The actual picture) */
@@ -2012,7 +2013,10 @@ body.ripplestyle #chat .mes .mesAvatarWrapper .avatar img {
     object-fit: cover !important;
     object-position: top center !important;
     display: block !important;
-    border: none !important;
+    
+    /* Ensure the image doesn't override the parent border/shadow */
+    border: none !important; 
+    box-shadow: none !important;
 }
 
 /* 5. TEXT BUBBLE (Right Side) */
@@ -2026,15 +2030,12 @@ body.ripplestyle #chat .mes[is_user="true"] .mes_block {
     min-height: 150px !important;
     
     position: relative;
-    background-color: var(--SmartThemeBotMesBlurTintColor) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
     padding: 20px 25px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3) !important;
-}
-
-body.ripplestyle #chat .mes[is_user="true"] .mes_block {
-    background-color: var(--SmartThemeUserMesBlurTintColor) !important;
+    
+    /* Ensure no default ST styles block your external theme */
+    background: transparent !important; 
+    box-shadow: none !important;
+    border: none !important;
 }
 
 /* 6. CLEANUP */
@@ -2044,21 +2045,20 @@ body.ripplestyle #chat .chat_msg_avatar {
     display: none !important;
 }
 
+/* 7. NAME HEADER (Structure Only) */
 body.ripplestyle #chat .mes .ch_name {
     display: block !important;
     text-align: left !important;
     margin-bottom: 15px !important;
-    font-size: 1.2em !important;
-    font-weight: bold !important;
-    border-bottom: 1px solid rgba(255,255,255,0.15);
     padding-bottom: 8px;
+    /* Color and Font styles will come from your external file */
 }
 body.ripplestyle #chat .mes[is_user="true"] .ch_name {
     margin-right: 0 !important;
     text-align: left !important;
 }
 
-/* 7. MOBILE FIXES */
+/* 8. MOBILE FIXES */
 @media screen and (max-width: 1000px) {
     body.ripplestyle #chat .mes,
     body.ripplestyle.big-avatars #chat .mes,
@@ -2070,6 +2070,7 @@ body.ripplestyle #chat .mes[is_user="true"] .ch_name {
         height: 165px !important;
     }
 }
+
 /* --- Chat Style: Tide 聊天風格：「潮汐」 --- */
 
 body.tidestyle #chat {
