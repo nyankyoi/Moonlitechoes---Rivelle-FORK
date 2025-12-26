@@ -1939,7 +1939,7 @@ body.hushstyle #chat {
     }
 }
 
-/* --- Chat Style: Ripple (Supernova Fix) --- */
+/* --- Chat Style: Ripple (Aligned & Big) --- */
 
 /* 1. MAIN GRID SETUP */
 body.ripplestyle #chat .mes,
@@ -1947,7 +1947,7 @@ body.ripplestyle.big-avatars #chat .mes,
 body.ripplestyle #chat .mes[is_user="true"],
 body.ripplestyle.big-avatars #chat .mes[is_user="true"] {
     display: grid !important;
-    grid-template-columns: 280px 1fr !important; /* Force the column width */
+    grid-template-columns: 280px 1fr !important;
     gap: 20px !important;
     align-items: start !important;
     
@@ -1955,7 +1955,10 @@ body.ripplestyle.big-avatars #chat .mes[is_user="true"] {
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
-    margin: 30px 0 !important;
+    
+    /* MARGIN UPDATE: 10px on the Left to align with input box */
+    margin: 30px 0 30px 10px !important; 
+    
     overflow: visible !important;
 }
 
@@ -1965,30 +1968,29 @@ body.ripplestyle.big-avatars #chat .mes .mesAvatarWrapper {
     grid-column: 1 !important;
     order: 1 !important;
     
-    /* Force wrapper to fill the 280px column */
-    width: 100% !important; 
-    display: block !important; /* Stop it from flexing/centering */
+    width: 100% !important;
+    display: block !important;
     position: sticky !important;
     top: 20px !important;
     z-index: 10;
-    margin: 0 !important;
     padding: 0 !important;
+    
+    /* MARGIN TOP UPDATE: Pushes image down to align with text bubble, not name */
+    margin: 35px 0 0 0 !important; 
 }
 
 /* 3. AVATAR BOX (The Frame) */
 body.ripplestyle #chat .mes .avatar,
 body.ripplestyle.big-avatars #chat .mes .avatar,
 body.ripplestyle #chat .mes .mesAvatarWrapper .avatar {
-    /* FORCE DIMENSIONS */
     width: 100% !important;
     height: 420px !important;
     
-    /* Remove default ST limits */
     min-width: 100% !important;
     max-width: none !important;
     max-height: none !important;
     
-    display: block !important; /* Ensure it's not a flexbox centering the img */
+    display: block !important;
     border-radius: 15px !important;
     box-shadow: 4px 4px 15px rgba(0,0,0,0.5) !important;
     margin: 0 !important;
@@ -2000,11 +2002,9 @@ body.ripplestyle #chat .mes .mesAvatarWrapper .avatar {
 body.ripplestyle #chat .mes .avatar img,
 body.ripplestyle.big-avatars #chat .mes .avatar img,
 body.ripplestyle #chat .mes .mesAvatarWrapper .avatar img {
-    /* CRITICAL FIXES */
     width: 100% !important;
     height: 100% !important;
     
-    /* This overrides the small size limit causing the issue */
     max-width: none !important; 
     max-height: none !important;
     min-width: 100% !important;
@@ -2033,19 +2033,17 @@ body.ripplestyle #chat .mes[is_user="true"] .mes_block {
     box-shadow: 0 4px 10px rgba(0,0,0,0.3) !important;
 }
 
-/* User Bubble Color */
 body.ripplestyle #chat .mes[is_user="true"] .mes_block {
     background-color: var(--SmartThemeUserMesBlurTintColor) !important;
 }
 
-/* 6. CLEANUP (Hide duplicates) */
+/* 6. CLEANUP */
 body.ripplestyle #chat .mes .mes_block .avatar,
 body.ripplestyle #chat .mes .ch_name .avatar,
 body.ripplestyle #chat .chat_msg_avatar {
     display: none !important;
 }
 
-/* Name Header */
 body.ripplestyle #chat .mes .ch_name {
     display: block !important;
     text-align: left !important;
