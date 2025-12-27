@@ -3861,18 +3861,43 @@ body.hushstyle {
     color: red !important;
 }
 
-/* --- Fix: Unclash Small Avatar in Whisper Style --- */
+/* --- Fix: Astra Header Alignment & Faces (Whisper Style) --- */
 
-/* Target the specific class you found in the console */
-body.whisperstyle #chat .mes .astra-messageHeader__avatar img,
-body.whisperstyle #chat .mes .astra-messageHeader__avatar {
-    /* Moves the avatar up by 10 pixels */
-    transform: translateY(-10px) !important; 
+/* 1. Target the Main Header Container (Holds both Name and Avatar) */
+body.whisperstyle #chat .mes .astra-messageHeader {
+    display: flex !important;
+    align-items: center !important; /* Forces Name to align with Avatar center */
+    margin-bottom: 15px !important; /* Pushes the message text down to prevent clashing */
+    transform: translateY(-5px) !important; /* Moves the WHOLE header up slightly */
     position: relative;
     z-index: 5;
 }
 
-/* Fallback: Targets standard SillyTavern small avatars in Whisper style just in case */
-body.whisperstyle #chat .mes .mesAvatarWrapper .avatar img {
-    transform: translateY(-10px) !important;
+/* 2. Target the Avatar Wrapper */
+body.whisperstyle #chat .mes .astra-messageHeader__avatar {
+    /* Ensure the wrapper stays circular and visible */
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* 3. Target the Avatar Image (Fixes "Covers the face") */
+body.whisperstyle #chat .mes .astra-messageHeader__avatar img {
+    /* Reset the previous transform that was cutting off the face */
+    transform: none !important; 
+    
+    /* Force the image to focus on the top-center (The Face) */
+    object-position: top center !important; 
+    object-fit: cover !important;
+    
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* 4. Target the Name (Ensures it respects the alignment) */
+body.whisperstyle #chat .mes .astra-messageHeader .ch_name,
+body.whisperstyle #chat .mes .astra-messageHeader__name {
+    margin-bottom: 0 !important; /* Remove extra margins causing misalignment */
+    align-self: center !important;
 }
