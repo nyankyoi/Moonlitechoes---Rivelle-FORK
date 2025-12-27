@@ -1615,12 +1615,12 @@ body.whisperstyle #chat .mes {
     position: relative;
     padding: 1em;
     
-    /* CHANGED: Increased from 45px to 75px to move text down 30px */
-    padding-top: 75px !important; 
+    /* CHANGED: Increased from 75px to 85px */
+    padding-top: 85px !important; 
     
     border-radius: 15px;
 
-    /* ... (Rest of the Whisper code below stays the same) ... */
+    /* ... (Rest of the Whisper code follows) ... */
     &::before {
         content: "";
         position: absolute;
@@ -1680,13 +1680,13 @@ body.whisperstyle #chat .mes {
             border-right: 3.5px solid var(--SmartThemeBodyColor);
         }
     }
-
+    
+    /* (You can keep the rest of the inner classes as they were in your file) */
     .lastInContext {
         border: 0px;
         box-shadow: none !important;
         border-radius: 0;
     }
-
     .mesAvatarWrapper,
     .mes_buttons,
     .mes_edit_buttons,
@@ -1702,7 +1702,6 @@ body.whisperstyle #chat .mes {
         background-color: unset !important;
         box-shadow: unset !important;
     }
-
     .mes_text {
         position: relative;
         display: inline-block;
@@ -1711,7 +1710,6 @@ body.whisperstyle #chat .mes {
         margin-bottom: 0 !important;
         padding-bottom: 0 !important;
     }
-
     .mes_timer,
     .mesIDDisplay,
     .tokenCounterDisplay {
