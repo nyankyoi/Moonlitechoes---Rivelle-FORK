@@ -3860,3 +3860,19 @@ body.hushstyle {
 #ReverseProxyWarningMessage {
     color: red !important;
 }
+
+/* --- Fix: Unclash Small Avatar in Whisper Style --- */
+
+/* Target the specific class you found in the console */
+body.whisperstyle #chat .mes .astra-messageHeader__avatar img,
+body.whisperstyle #chat .mes .astra-messageHeader__avatar {
+    /* Moves the avatar up by 10 pixels */
+    transform: translateY(-10px) !important; 
+    position: relative;
+    z-index: 5;
+}
+
+/* Fallback: Targets standard SillyTavern small avatars in Whisper style just in case */
+body.whisperstyle #chat .mes .mesAvatarWrapper .avatar img {
+    transform: translateY(-10px) !important;
+}
