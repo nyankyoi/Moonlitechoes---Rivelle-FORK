@@ -1605,6 +1605,8 @@ body.echostyle #chat {
 
 /* --- Chat Style: Whisper 聊天風格：「低語」 --- */
 
+/* --- Chat Style: Whisper (Fixed Mobile Spacing) --- */
+
 body.whisperstyle #chat .mes {
     display: block;
     flex-direction: column;
@@ -1615,12 +1617,12 @@ body.whisperstyle #chat .mes {
     position: relative;
     padding: 1em;
     
-    /* DESKTOP PADDING: Kept at 75px as requested */
+    /* DESKTOP PADDING: 75px */
     padding-top: 75px !important; 
     
     border-radius: 15px;
 
-    /* Background Image (Avatar) */
+    /* Background Avatar */
     &::before {
         content: "";
         position: absolute;
@@ -1654,21 +1656,6 @@ body.whisperstyle #chat .mes {
         z-index: 3;
     }
 
-    /* --- MOBILE SPECIFIC ADJUSTMENTS --- */
-    @media screen and (max-width: 1000px) {
-        /* MOBILE PADDING: Bumping it down to 85px */
-        padding-top: 85px !important; 
-
-        &::before {
-            top: 0;
-            width: 55%;
-            min-height: 125px !important;
-        }
-        &::after {
-            top: 95px;
-        }
-    }
-
     /* Whisper: User Message */
     &[is_user="true"] {
         background-color: var(--SmartThemeUserMesBlurTintColor) !important;
@@ -1686,7 +1673,7 @@ body.whisperstyle #chat .mes {
         }
     }
 
-    /* Cleanup */
+    /* Internal Elements Cleanup */
     .lastInContext {
         border: 0px;
         box-shadow: none !important;
@@ -1726,76 +1713,93 @@ body.whisperstyle #chat .mes {
     }
 }
 
-    .ch_name {
-        margin-bottom: 10px;
-
-        .name_text {
-            display: inline-block !important;
-            margin-right: 5px;
-        }
+/* --- MOBILE SPECIFIC WHISPER OVERRIDES --- */
+/* This is now OUTSIDE the main block to ensure it works */
+@media screen and (max-width: 1000px) {
+    body.whisperstyle #chat .mes {
+        /* MOBILE PADDING: Increased to 95px to force it down */
+        padding-top: 95px !important; 
     }
 
-    .mesAvatarWrapper {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        flex-wrap: wrap;
-        min-height: 45px;
+    /* Mobile adjustments for the background image */
+    body.whisperstyle #chat .mes::before {
+        top: 0;
+        width: 55%;
+        min-height: 125px !important;
     }
-    .mesIDDisplay {
-        background: var(--customBgColor1);
-        padding: 0 8px;
-        border-radius: 8px;
-        opacity: 0.8;
+    body.whisperstyle #chat .mes::after {
+        top: 95px;
     }
-    .timestamp {
-        font-size: calc(var(--mainFontSize) * 0.7);
-        font-weight: 400;
-        white-space: nowrap;
+}
+
+/* --- Rest of Whisper Elements --- */
+body.whisperstyle .ch_name {
+    margin-bottom: 10px;
+    .name_text {
+        display: inline-block !important;
         margin-right: 5px;
     }
-    .mes_reasoning_summary {
-        left: calc(var(--custom-echo-avatar) + 5px + 8px);
+}
 
+body.whisperstyle .mesAvatarWrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    min-height: 45px;
+}
+body.whisperstyle .mesIDDisplay {
+    background: var(--customBgColor1);
+    padding: 0 8px;
+    border-radius: 8px;
+    opacity: 0.8;
+}
+body.whisperstyle .timestamp {
+    font-size: calc(var(--mainFontSize) * 0.7);
+    font-weight: 400;
+    white-space: nowrap;
+    margin-right: 5px;
+}
+body.whisperstyle .mes_reasoning_summary {
+    left: calc(var(--custom-echo-avatar) + 5px + 8px);
+}
+
+body.whisperstyle .last_mes {
+    padding-bottom: 5px !important;
+
+    .mesAvatarWrapper {
+        padding-bottom: unset;
     }
 
-    .last_mes {
-        padding-bottom: 5px !important;
-
-        .mesAvatarWrapper {
-            padding-bottom: unset;
-        }
-
-        .swipe_right,
-        .swipe_left {
-            opacity: 0.6;
-            transform: scale(0.8);
-        }
-
-        .swipe_left,
-        .swipeRightBlock {
-            bottom: 10px !important;
-        }
-        .swipeRightBlock {
-            position: absolute;
-            display: flex;
-            flex-direction: row-reverse;
-            justify-content: flex-end;
-            right: 20px;
-        }
-        .swipes-counter {
-            width: 60px;
-            text-align: center;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            opacity: 0.9 !important;
-            letter-spacing: 1.5px;
-        }
+    .swipe_right,
+    .swipe_left {
+        opacity: 0.6;
+        transform: scale(0.8);
     }
 
-    .menu_button {
-        background: color-mix(in srgb, var(--SmartThemeBlurTintColor) 25%, transparent);
+    .swipe_left,
+    .swipeRightBlock {
+        bottom: 10px !important;
     }
+    .swipeRightBlock {
+        position: absolute;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        right: 20px;
+    }
+    .swipes-counter {
+        width: 60px;
+        text-align: center;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        opacity: 0.9 !important;
+        letter-spacing: 1.5px;
+    }
+}
+
+body.whisperstyle .menu_button {
+    background: color-mix(in srgb, var(--SmartThemeBlurTintColor) 25%, transparent);
 }
 
 /* --- Chat Style: Hush 聊天風格：「輕聲」 --- */
