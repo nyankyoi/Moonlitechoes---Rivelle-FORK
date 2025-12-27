@@ -1605,118 +1605,120 @@ body.echostyle #chat {
 
 /* --- Chat Style: Whisper 聊天風格：「低語」 --- */
 
-body.whisperstyle #chat {
-    .mes {
-        display: block;
-        flex-direction: column;
-        align-items: flex-start;
-        margin-top: 10px;
-        width: 100%;
-        color: var(--SmartThemeBodyColor);
-        position: relative;
-        padding: 1em;
-        padding-top: 45px !important;
-        border-radius: 15px;
+body.whisperstyle #chat .mes {
+    display: block;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10px;
+    width: 100%;
+    color: var(--SmartThemeBodyColor);
+    position: relative;
+    padding: 1em;
+    
+    /* CHANGED: Increased from 45px to 75px to move text down 30px */
+    padding-top: 75px !important; 
+    
+    border-radius: 15px;
 
+    /* ... (Rest of the Whisper code below stays the same) ... */
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: var(--customWhisperAvatarWidth, 50%);
+        height: 100px;
+        background: var(--mes-avatar-url) var(--customWhisperAvatarAlign) no-repeat;
+        background-size: cover;
+        mask-image: linear-gradient(to bottom, black 60%, rgba(0, 0, 0, 0) 100%);
+        mask-size: 100% 100%;
+        mask-repeat: no-repeat;
+        -webkit-mask-image: linear-gradient(to left, black 60%, rgba(0, 0, 0, 0) 100%);
+        -webkit-mask-size: 100% 100%;
+        -webkit-mask-repeat: no-repeat;
+        z-index: 0;
+        border-radius: 0 15px 0 0 !important;
+        opacity: 0.8;
+    }
+    &.last_mes::before {
+        filter: none;
+    }
+    &::after {
+        content: "";
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 5px;
+        height: 30px;
+        opacity: 0.9;
+        z-index: 3;
+    }
+    @media screen and (max-width: 1000px) {
         &::before {
-            content: "";
-            position: absolute;
             top: 0;
-            right: 0;
-            width: var(--customWhisperAvatarWidth, 50%);
-            height: 100px;
-            background: var(--mes-avatar-url) var(--customWhisperAvatarAlign) no-repeat;
-            background-size: cover;
-            mask-image: linear-gradient(to bottom, black 60%, rgba(0, 0, 0, 0) 100%);
-            mask-size: 100% 100%;
-            mask-repeat: no-repeat;
-            -webkit-mask-image: linear-gradient(to left, black 60%, rgba(0, 0, 0, 0) 100%);
-            -webkit-mask-size: 100% 100%;
-            -webkit-mask-repeat: no-repeat;
-            z-index: 0;
-            border-radius: 0 15px 0 0 !important;
-            opacity: 0.8;
-        }
-        &.last_mes::before {
-            filter: none;
+            width: 55%;
+            min-height: 125px !important;
         }
         &::after {
-            content: "";
-            position: absolute;
-            top: 70px;
-            right: 0;
-            width: 5px;
-            height: 30px;
-            opacity: 0.9;
-            z-index: 3;
-        }
-        @media screen and (max-width: 1000px) {
-            &::before {
-                top: 0;
-                width: 55%;
-                min-height: 125px !important;
-            }
-            &::after {
-                top: 95px;
-            }
-
-        }
-
-        /* Whisper: User Message 低語：使用者訊息 */
-        &[is_user="true"] {
-            background-color: var(--SmartThemeUserMesBlurTintColor) !important;
-
-            &::after {
-                border-right: 3.5px solid var(--customThemeColor);
-            }
-        }
-        /* Whisper: Character Message 低語：角色訊息 */
-        &[is_user="false"] {
-            background-color: var(--SmartThemeBotMesBlurTintColor) !important;
-
-            &::after {
-                border-right: 3.5px solid var(--SmartThemeBodyColor);
-            }
-        }
-
-        .lastInContext {
-            border: 0px;
-            box-shadow: none !important;
-            border-radius: 0;
-        }
-
-        .mesAvatarWrapper,
-        .mes_buttons,
-        .mes_edit_buttons,
-        .mes_reasoning_details{
-            z-index: 2;
-        }
-        .mes_block {
-            display: block;
-            padding: 0 !important;
-            overflow: visible;
-            position: relative;
-            transform: translateY(calc(var(--custom-ChatAvatar) * (-1 + 0.325))) !important;
-            background-color: unset !important;
-            box-shadow: unset !important;
-        }
-
-        .mes_text {
-            position: relative;
-            display: inline-block;
-            width: 100%;
-            max-width: 100%;
-            margin-bottom: 0 !important;
-            padding-bottom: 0 !important;
-        }
-
-        .mes_timer,
-        .mesIDDisplay,
-        .tokenCounterDisplay {
-            display: inline-block;
-            transform: translateY(calc(var(--custom-ChatAvatar) * -0.375));
+            top: 95px;
         }
     }
+
+    /* Whisper: User Message */
+    &[is_user="true"] {
+        background-color: var(--SmartThemeUserMesBlurTintColor) !important;
+
+        &::after {
+            border-right: 3.5px solid var(--customThemeColor);
+        }
+    }
+    /* Whisper: Character Message */
+    &[is_user="false"] {
+        background-color: var(--SmartThemeBotMesBlurTintColor) !important;
+
+        &::after {
+            border-right: 3.5px solid var(--SmartThemeBodyColor);
+        }
+    }
+
+    .lastInContext {
+        border: 0px;
+        box-shadow: none !important;
+        border-radius: 0;
+    }
+
+    .mesAvatarWrapper,
+    .mes_buttons,
+    .mes_edit_buttons,
+    .mes_reasoning_details{
+        z-index: 2;
+    }
+    .mes_block {
+        display: block;
+        padding: 0 !important;
+        overflow: visible;
+        position: relative;
+        transform: translateY(calc(var(--custom-ChatAvatar) * (-1 + 0.325))) !important;
+        background-color: unset !important;
+        box-shadow: unset !important;
+    }
+
+    .mes_text {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    .mes_timer,
+    .mesIDDisplay,
+    .tokenCounterDisplay {
+        display: inline-block;
+        transform: translateY(calc(var(--custom-ChatAvatar) * -0.375));
+    }
+}
 
     .ch_name {
         margin-bottom: 10px;
