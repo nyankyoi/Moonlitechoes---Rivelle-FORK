@@ -2071,6 +2071,24 @@ body.ripplestyle #chat .mes[is_user="true"] .ch_name {
     }
 }
 
+/* --- FIX: Prevent Text Box Shrinking During Edit (Ripple Style) --- */
+
+/* 1. When the message block contains an edit box, force it to fill the grid column */
+body.ripplestyle #chat .mes .mes_block:has(.edit_textarea),
+body.ripplestyle #chat .mes:has(.edit_textarea) .mes_block {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* 2. Force the actual typing area to fill that space */
+body.ripplestyle #chat .mes .edit_textarea {
+    width: 100% !important;
+    min-width: 100% !important;
+    box-sizing: border-box !important;
+    min-height: 150px !important; /* Gives you plenty of vertical space to type */
+    resize: vertical; 
+}
+
 /* --- Chat Style: Tide 聊天風格：「潮汐」 --- */
 
 body.tidestyle #chat {
